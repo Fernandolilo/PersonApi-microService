@@ -1,5 +1,8 @@
 package com.systempro.person.entities;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -16,30 +20,30 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	@Column(unique = true)
 	private String email;
 	private String password;
 	@CPF
 	@Column(unique = true)
 	private String cpf;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "departiment_id")
 	private Departiment departiment;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "function_id")
 	private Function function;
-	
+
 	public User() {
 	}
 
-	public User(Integer id, String name, String email, String password,
-			String cpf, Departiment departiment,
+	public User(Integer id, String name, String email, String password, String cpf, Departiment departiment,
 			Function function) {
 		this.id = id;
 		this.name = name;
@@ -48,6 +52,7 @@ public class User implements Serializable {
 		this.cpf = cpf;
 		this.departiment = departiment;
 		this.function = function;
+
 	}
 
 	public Integer getId() {
@@ -132,24 +137,4 @@ public class User implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("id: ")
-			   .append(id)
-			   .append(", nome: ")
-			   .append(name)
-			   .append(", email: ")
-			   .append(email)
-			   .append(", cpf: ")
-			   .append(cpf)
-			   .append(", departamento: ")
-			   .append(departiment)
-			   .append(", função: ")
-			   .append(function);
-		return builder.toString();
-	}
-	
-	
-	
 }

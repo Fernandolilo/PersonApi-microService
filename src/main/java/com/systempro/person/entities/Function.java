@@ -15,27 +15,31 @@ import javax.persistence.OneToMany;
 @Entity
 public class Function implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String function;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-	
+	@JoinColumn(name = "departiment_id")
+	private Departiment departiment;
+
 	@OneToMany(mappedBy = "function")
-	private List<Departiment> departments = new ArrayList<>();
-	
+	private List<User> users = new ArrayList<>();
+
 	public Function() {
 	}
 
-	public Function(Integer id, String function, User user) {
+	public Function(Integer id, String function, Departiment departiment) {
 		super();
 		this.id = id;
 		this.function = function;
-		this.user = user;
+		this.departiment = departiment;
+	}
+
+	public List<User> getUsers() {
+		return users;
 	}
 
 	public Integer getId() {
@@ -54,16 +58,12 @@ public class Function implements Serializable {
 		this.function = function;
 	}
 
-	public User getUser() {
-		return user;
+	public Departiment getDepartiment() {
+		return departiment;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public List<Departiment> getDepartments() {
-		return departments;
+	public void setDepartments(Departiment departiment) {
+		this.departiment = departiment;
 	}
 
 	@Override
@@ -89,20 +89,6 @@ public class Function implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("id: ")
-			   .append(id)
-			   .append(", função: ")
-			   .append(function)
-			   .append(", Funcionário: ")
-			   .append(user)
-			   .append(", departamento: ")
-			   .append(departments);
-		return builder.toString();
 	}
 
 }
