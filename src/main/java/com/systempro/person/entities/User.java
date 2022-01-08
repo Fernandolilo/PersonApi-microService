@@ -1,15 +1,38 @@
 package com.systempro.person.entities;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import org.hibernate.validator.constraints.br.CPF;
 
-public class User {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String email;
 	private String password;
 	@CPF
+	@Column(unique = true)
 	private String cpf;
+	
+	@ManyToOne
+	@JoinColumn(name = "departiment_id")
 	private Departiment departiment;
+	
+	@ManyToOne
+	@JoinColumn(name = "function_id")
 	private Function function;
 	
 	public User() {
@@ -51,6 +74,7 @@ public class User {
 		this.email = email;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}

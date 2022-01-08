@@ -1,0 +1,12 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /auth
+
+spring:
+  application:
+    name: auth
+  profiles:
+    active:
+     - "test"
+  
