@@ -1,9 +1,15 @@
 package com.systempro.person.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +19,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.systempro.person.enums.Perfil;
 
 @Entity
 public class Client implements Serializable {
@@ -37,7 +44,12 @@ public class Client implements Serializable {
 	@JoinColumn(name = "occupation_id")
 	private Occupation occupation;
 
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+
 	public Client() {
+		addPerfil(Perfil.CLIENT);
 	}
 
 	public Client(Integer id, String name, String email, String password, String cpf, Department department,
@@ -49,7 +61,7 @@ public class Client implements Serializable {
 		this.cpf = cpf;
 		this.department = department;
 		this.occupation = occupation;
-
+		addPerfil(Perfil.CLIENT);
 	}
 
 	public Integer getId() {
@@ -107,6 +119,14 @@ public class Client implements Serializable {
 
 	public void setFunction(Occupation occupation) {
 		this.occupation = occupation;
+	}
+	
+	public Set<Perfil> getPerfis(){
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 
 	@Override

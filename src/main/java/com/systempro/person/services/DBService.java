@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.systempro.person.entities.Department;
 import com.systempro.person.entities.Occupation;
+import com.systempro.person.enums.Perfil;
 import com.systempro.person.entities.Client;
 import com.systempro.person.repositories.DepartmentRepository;
 import com.systempro.person.repositories.OccupationRepository;
@@ -36,6 +37,7 @@ public class DBService {
 		Department d1 = new Department(null, "Departamento T.I");
 		Occupation f1 = new Occupation(null, "Tecnico de campo I", d1);
 		Client u1 = new Client(null, "Fernando da Silva", "nando.systempro@hotmail.com",bCryptPasswordEncoder.encode("1234"), "36906855832", d1, f1);
+		u1.addPerfil(Perfil.ADMIN);
 		
 		d1.getFunctions().add(f1);
 		d1.getUsers().add(u1);
