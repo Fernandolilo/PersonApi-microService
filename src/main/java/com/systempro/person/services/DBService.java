@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.systempro.person.entities.Departiment;
-import com.systempro.person.entities.Function;
+import com.systempro.person.entities.Department;
+import com.systempro.person.entities.Occupation;
 import com.systempro.person.entities.Client;
 import com.systempro.person.repositories.DepartimentRepository;
 import com.systempro.person.repositories.FunctionRepository;
@@ -31,8 +31,8 @@ public class DBService {
 
 	public void instantiateTestDatabase() {
 
-		Departiment d1 = new Departiment(null, "Departamento T.I");
-		Function f1 = new Function(null, "Tecnico de campo I", d1);
+		Department d1 = new Department(null, "Departamento T.I");
+		Occupation f1 = new Occupation(null, "Tecnico de campo I", d1);
 		Client u1 = new Client(null, "Fernando da Silva", "nando.systempro@hotmail.com","1234", "36906855832", d1, f1);
 		
 		d1.getFunctions().add(f1);

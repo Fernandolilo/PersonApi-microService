@@ -34,24 +34,24 @@ public class Client implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "departiment_id")
-	private Departiment departiment;
+	private Department department;
 
 	@ManyToOne
 	@JoinColumn(name = "function_id")
-	private Function function;
+	private Occupation occupation;
 
 	public Client() {
 	}
 
-	public Client(Integer id, String name, String email, String password, String cpf, Departiment departiment,
-			Function function) {
+	public Client(Integer id, String name, String email, String password, String cpf, Department department,
+			Occupation occupation) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.cpf = cpf;
-		this.departiment = departiment;
-		this.function = function;
+		this.department = department;
+		this.occupation = occupation;
 
 	}
 
@@ -96,20 +96,20 @@ public class Client implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public Departiment getDepartiment() {
-		return departiment;
+	public Department getDepartiment() {
+		return department;
 	}
 
-	public void setDepartiment(Departiment departiment) {
-		this.departiment = departiment;
+	public void setDepartiment(Department department) {
+		this.department = department;
 	}
 
-	public Function getFunction() {
-		return function;
+	public Occupation getFunction() {
+		return occupation;
 	}
 
-	public void setFunction(Function function) {
-		this.function = function;
+	public void setFunction(Occupation occupation) {
+		this.occupation = occupation;
 	}
 
 	@Override

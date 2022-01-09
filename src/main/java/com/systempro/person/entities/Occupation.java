@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Function implements Serializable {
+public class Occupation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,19 +23,19 @@ public class Function implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "departiment_id")
-	private Departiment departiment;
+	private Department department;
 
 	@OneToMany(mappedBy = "function")
 	private List<Client> clients = new ArrayList<>();
 
-	public Function() {
+	public Occupation() {
 	}
 
-	public Function(Integer id, String function, Departiment departiment) {
+	public Occupation(Integer id, String function, Department department) {
 		super();
 		this.id = id;
 		this.function = function;
-		this.departiment = departiment;
+		this.department = department;
 	}
 
 	public List<Client> getUsers() {
@@ -58,12 +58,12 @@ public class Function implements Serializable {
 		this.function = function;
 	}
 
-	public Departiment getDepartiment() {
-		return departiment;
+	public Department getDepartiment() {
+		return department;
 	}
 
-	public void setDepartments(Departiment departiment) {
-		this.departiment = departiment;
+	public void setDepartments(Department department) {
+		this.department = department;
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class Function implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Function other = (Function) obj;
+		Occupation other = (Occupation) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

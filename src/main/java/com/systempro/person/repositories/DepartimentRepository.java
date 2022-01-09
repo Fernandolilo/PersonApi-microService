@@ -3,9 +3,9 @@ package com.systempro.person.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.systempro.person.entities.Departiment;
+import com.systempro.person.entities.Department;
 
 @Repository
-public interface DepartimentRepository extends JpaRepository<Departiment, Integer>{
+public interface DepartimentRepository extends JpaRepository<Department, Integer>{
 
 }

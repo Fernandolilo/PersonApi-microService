@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Departiment implements Serializable {
+public class Department implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -20,15 +20,15 @@ public class Departiment implements Serializable {
 	private String department;
 
 	@OneToMany(mappedBy = "departiment")
-	private List<Function> functions = new ArrayList<>();
+	private List<Occupation> occupations = new ArrayList<>();
 
 	@OneToMany(mappedBy = "departiment")
 	private List<Client> clients = new ArrayList<>();
 
-	public Departiment() {
+	public Department() {
 	}
 
-	public Departiment(Integer id, String department) {
+	public Department(Integer id, String department) {
 		super();
 		this.id = id;
 		this.department = department;
@@ -51,8 +51,8 @@ public class Departiment implements Serializable {
 		this.department = department;
 	}
 
-	public List<Function> getFunctions() {
-		return functions;
+	public List<Occupation> getFunctions() {
+		return occupations;
 	}
 
 	public List<Client> getUsers() {
