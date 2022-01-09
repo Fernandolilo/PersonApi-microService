@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.systempro.person.entities.Occupation;
 
 @Repository
-public interface FunctionRepository extends JpaRepository<Occupation, Integer>{
+public interface OccupationRepository extends JpaRepository<Occupation, Integer>{
 
 }

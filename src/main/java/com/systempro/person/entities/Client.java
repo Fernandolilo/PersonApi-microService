@@ -1,8 +1,6 @@
 package com.systempro.person.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -33,11 +30,11 @@ public class Client implements Serializable {
 	private String cpf;
 
 	@ManyToOne
-	@JoinColumn(name = "departiment_id")
+	@JoinColumn(name = "department_id")
 	private Department department;
 
 	@ManyToOne
-	@JoinColumn(name = "function_id")
+	@JoinColumn(name = "occupation_id")
 	private Occupation occupation;
 
 	public Client() {

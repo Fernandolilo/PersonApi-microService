@@ -19,22 +19,22 @@ public class Occupation implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String function;
+	private String occupation;
 
 	@ManyToOne
-	@JoinColumn(name = "departiment_id")
+	@JoinColumn(name = "department_id")
 	private Department department;
 
-	@OneToMany(mappedBy = "function")
+	@OneToMany(mappedBy = "occupation")
 	private List<Client> clients = new ArrayList<>();
 
 	public Occupation() {
 	}
 
-	public Occupation(Integer id, String function, Department department) {
+	public Occupation(Integer id, String occupation, Department department) {
 		super();
 		this.id = id;
-		this.function = function;
+		this.occupation = occupation;
 		this.department = department;
 	}
 
@@ -50,15 +50,15 @@ public class Occupation implements Serializable {
 		this.id = id;
 	}
 
-	public String getFunction() {
-		return function;
+	public String getOccupation() {
+		return occupation;
 	}
 
-	public void setFunction(String function) {
-		this.function = function;
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
 	}
 
-	public Department getDepartiment() {
+	public Department getDepartment() {
 		return department;
 	}
 

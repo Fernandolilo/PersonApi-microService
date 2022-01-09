@@ -19,10 +19,10 @@ public class Department implements Serializable {
 	private Integer id;
 	private String department;
 
-	@OneToMany(mappedBy = "departiment")
+	@OneToMany(mappedBy = "department")
 	private List<Occupation> occupations = new ArrayList<>();
 
-	@OneToMany(mappedBy = "departiment")
+	@OneToMany(mappedBy = "department")
 	private List<Client> clients = new ArrayList<>();
 
 	public Department() {
