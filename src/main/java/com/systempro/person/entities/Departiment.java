@@ -23,7 +23,7 @@ public class Departiment implements Serializable {
 	private List<Function> functions = new ArrayList<>();
 
 	@OneToMany(mappedBy = "departiment")
-	private List<User> users = new ArrayList<>();
+	private List<Client> clients = new ArrayList<>();
 
 	public Departiment() {
 	}
@@ -55,8 +55,8 @@ public class Departiment implements Serializable {
 		return functions;
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public List<Client> getUsers() {
+		return clients;
 	}
 
 }

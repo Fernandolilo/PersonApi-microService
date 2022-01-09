@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class User implements Serializable {
+public class Client implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -40,10 +40,10 @@ public class User implements Serializable {
 	@JoinColumn(name = "function_id")
 	private Function function;
 
-	public User() {
+	public Client() {
 	}
 
-	public User(Integer id, String name, String email, String password, String cpf, Departiment departiment,
+	public Client(Integer id, String name, String email, String password, String cpf, Departiment departiment,
 			Function function) {
 		this.id = id;
 		this.name = name;
@@ -128,7 +128,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Client other = (Client) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

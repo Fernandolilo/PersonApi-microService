@@ -1,11 +1,11 @@
 server:
   port: 8083
   servlet:
-    context-path: /auth
+    context-path: /client
 
 spring:
   application:
-    name: auth
+    name: client
   profiles:
     active:
      - "test"
