@@ -9,4 +9,10 @@ spring:
   profiles:
     active:
      - "test"
+     
+jwt:
+  secret: SequenciaDeCaracteresParaAssinarOToken
+  expiration: 86400000
+   
+
   
