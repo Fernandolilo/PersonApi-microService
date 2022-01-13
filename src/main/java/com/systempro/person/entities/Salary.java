@@ -8,46 +8,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class Occupation implements Serializable {
+@Table(name = "SALARY")
+public class Salary implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String occupation;
+	private Double salary;
+	private Double percentage;
 
-	@ManyToOne
-	@JoinColumn(name = "department_id")
-	private Department department;
+	@OneToMany(mappedBy = "salary")
+	private List<Occupation> occupations = new ArrayList<>();
 
-	@OneToMany(mappedBy = "occupation")
-	private List<Client> clients = new ArrayList<>();
-	
-	@ManyToOne
-	@JoinColumn(name = "salary_id")
-	private Salary salary;
-
-	public Occupation() {
+	public Salary() {
 	}
 
-	public Occupation(Integer id, String occupation, Department department, Salary salary) {
+	public Salary(Integer id, Double salary, Double percentage) {
 		this.id = id;
-		this.occupation = occupation;
-		this.department = department;
 		this.salary = salary;
-	}
-
-	public Salary getSalary() {
-		return salary;
-	}
-
-	public List<Client> getUsers() {
-		return clients;
+		this.percentage = percentage;
 	}
 
 	public Integer getId() {
@@ -58,20 +42,28 @@ public class Occupation implements Serializable {
 		this.id = id;
 	}
 
-	public String getOccupation() {
-		return occupation;
+	public Double getSalary() {
+		return salary;
 	}
 
-	public void setOccupation(String occupation) {
-		this.occupation = occupation;
+	public void setSalary(Double salary) {
+		this.salary = salary;
 	}
 
-	public Department getDepartment() {
-		return department;
+	public List<Occupation> getOccupations() {
+		return occupations;
 	}
 
-	public void setDepartments(Department department) {
-		this.department = department;
+	public Double getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(Double percentage) {
+		this.percentage = percentage;
+	}
+
+	public void increaseSalary() {
+		salary += salary * percentage/100;
 	}
 
 	@Override
@@ -90,7 +82,7 @@ public class Occupation implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Occupation other = (Occupation) obj;
+		Salary other = (Salary) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
