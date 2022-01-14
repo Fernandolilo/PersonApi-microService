@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Occupation implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -46,7 +48,8 @@ public class Occupation implements Serializable {
 		return salary;
 	}
 
-	public List<Client> getUsers() {
+	@JsonIgnore
+	public List<Client> getClient() {
 		return clients;
 	}
 

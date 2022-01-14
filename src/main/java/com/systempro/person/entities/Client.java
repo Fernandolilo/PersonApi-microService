@@ -120,8 +120,8 @@ public class Client implements Serializable {
 	public void setFunction(Occupation occupation) {
 		this.occupation = occupation;
 	}
-	
-	public Set<Perfil> getPerfis(){
+
+	public Set<Perfil> getPerfis() {
 		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 

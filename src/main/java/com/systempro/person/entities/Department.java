@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Department implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,9 +21,11 @@ public class Department implements Serializable {
 	private Integer id;
 	private String department;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "department")
 	private List<Occupation> occupations = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "department")
 	private List<Client> clients = new ArrayList<>();
 
@@ -29,7 +33,6 @@ public class Department implements Serializable {
 	}
 
 	public Department(Integer id, String department) {
-		super();
 		this.id = id;
 		this.department = department;
 
@@ -43,6 +46,7 @@ public class Department implements Serializable {
 		this.id = id;
 	}
 
+	@JsonIgnore
 	public String getDepartment() {
 		return department;
 	}
@@ -51,10 +55,12 @@ public class Department implements Serializable {
 		this.department = department;
 	}
 
+	@JsonIgnore
 	public List<Occupation> getFunctions() {
 		return occupations;
 	}
 
+	@JsonIgnore
 	public List<Client> getUsers() {
 		return clients;
 	}

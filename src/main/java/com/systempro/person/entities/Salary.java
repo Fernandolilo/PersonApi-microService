@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "SALARY")
 public class Salary implements Serializable {
@@ -22,16 +24,16 @@ public class Salary implements Serializable {
 	private Double salary;
 	private Double percentage;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "salary")
 	private List<Occupation> occupations = new ArrayList<>();
 
 	public Salary() {
 	}
 
-	public Salary(Integer id, Double salary, Double percentage) {
+	public Salary(Integer id, Double salary) {
 		this.id = id;
 		this.salary = salary;
-		this.percentage = percentage;
 	}
 
 	public Integer getId() {
@@ -54,6 +56,7 @@ public class Salary implements Serializable {
 		return occupations;
 	}
 
+	@JsonIgnore
 	public Double getPercentage() {
 		return percentage;
 	}
@@ -62,8 +65,49 @@ public class Salary implements Serializable {
 		this.percentage = percentage;
 	}
 
-	public void increaseSalary() {
-		salary += salary * percentage/100;
+	public double getINSS() {
+		if (salary <= 1100.00) {
+			return -salary * 0.075;
+		}
+		if (salary > 1100.00 && salary <= 2203.48) {
+			return (salary - 1100) * 0.09;
+		}
+		if (salary > 2203.48 && salary <= 3305.22) {
+			return (salary - 2203.48) * 0.12;
+		}
+		if (salary > 3305.22) {
+			return (salary - 3305.22) * 0.14;
+		} else {
+			return salary;
+		}
+	}
+
+	public double getFgts() {
+		return salary * 0.08;
+	}
+
+	public double getIR() {
+		if (salary <= 1903.98) {
+			return 0;
+		}
+		if (salary >= 1903.98 && salary <= 2826.65) {
+			return ((salary - getINSS())* 12 * 0.075) /12;
+		}
+		if (salary > 2826.65 && salary <= 3751.05) {
+			return ((salary - getINSS()) * 12 * 0.15) / 12;
+		}
+		if (salary > 3751.05 && salary <= 4664.68) {
+			return ((salary - getINSS()) * 12 * 0.225) / 12;
+		}
+		if (salary > 4664.68) {
+			return ((salary- getINSS()) * 12 * 0.275) / 12;
+		} else {
+			return salary;
+		}
+	}
+
+	public double getSalaryBase() {
+		return salary - (getINSS() + getIR() + getFgts());
 	}
 
 	@Override
