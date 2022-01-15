@@ -113,11 +113,11 @@ public class Client implements Serializable {
 		this.department = department;
 	}
 
-	public Occupation getFunction() {
+	public Occupation getOccupation() {
 		return occupation;
 	}
 
-	public void setFunction(Occupation occupation) {
+	public void setOccupation(Occupation occupation) {
 		this.occupation = occupation;
 	}
 
