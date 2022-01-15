@@ -30,22 +30,13 @@ public class Occupation implements Serializable {
 	@OneToMany(mappedBy = "occupation")
 	private List<Client> clients = new ArrayList<>();
 	
-	@ManyToOne
-	@JoinColumn(name = "salary_id")
-	private Salary salary;
-
 	public Occupation() {
 	}
 
-	public Occupation(Integer id, String occupation, Department department, Salary salary) {
+	public Occupation(Integer id, String occupation, Department department) {
 		this.id = id;
 		this.occupation = occupation;
 		this.department = department;
-		this.salary = salary;
-	}
-
-	public Salary getSalary() {
-		return salary;
 	}
 
 	@JsonIgnore
